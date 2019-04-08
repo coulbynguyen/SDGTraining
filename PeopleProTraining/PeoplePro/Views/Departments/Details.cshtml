@@ -1,0 +1,42 @@
+﻿@model PeoplePro.Models.Department
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Department</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DepartmentName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DepartmentName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DateFounded)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DateFounded)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Budget)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Budget)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Building)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Building.BuildingAbrev)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

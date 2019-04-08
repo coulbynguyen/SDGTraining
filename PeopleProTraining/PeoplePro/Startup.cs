@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PeoplePro.Dal.Infrastructure;
+using PeoplePro.Models;
 
 namespace PeoplePro
 {
@@ -37,6 +38,15 @@ namespace PeoplePro
             services.AddDbContext<PeopleProContext>(options => options.UseSqlServer(connection));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddDbContext<BuildingContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("BuildingContext")));
+
+            services.AddDbContext<DepartmentContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("DepartmentContext")));
+
+            services.AddDbContext<EmployeeContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("EmployeeContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
