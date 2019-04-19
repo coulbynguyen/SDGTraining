@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PeoplePro.Dal.Extensions
+namespace PeoplePro.Extensions
 {
     public class CacheItem<T> : CacheItemBase
     {

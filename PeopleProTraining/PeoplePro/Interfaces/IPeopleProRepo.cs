@@ -1,11 +1,11 @@
-﻿using PeoplePro.Dal.Models;
+﻿using PeoplePro.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PeoplePro.Dal.Interfaces
+namespace PeoplePro.Interfaces
 {
     public interface IPeopleProRepo
     {

@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 using System.Xml.Serialization;
 using System.Linq;
 
-namespace PeoplePro.Dal.Extensions
+namespace PeoplePro.Extensions
 {
     /// <summary>
     /// Helper class for caching serializers and reflection information to improve performance. Cache is stored in memory as static private members.  Thread safe.

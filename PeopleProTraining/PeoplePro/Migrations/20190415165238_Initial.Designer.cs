@@ -5,19 +5,19 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using PeoplePro.Models;
+using PeoplePro.Infrastructure;
 
-namespace PeoplePro.Migrations.Department
+namespace PeoplePro.Migrations
 {
-    [DbContext(typeof(DepartmentContext))]
-    [Migration("20190408162547_IntialCreate")]
-    partial class IntialCreate
+    [DbContext(typeof(PeopleProContext))]
+    [Migration("20190415165238_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
+                .HasAnnotation("ProductVersion", "2.1.3-rtm-32065")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -27,13 +27,15 @@ namespace PeoplePro.Migrations.Department
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("BuildingAbrev");
+                    b.Property<string>("BuildingAbrev")
+                        .IsRequired();
 
-                    b.Property<string>("BuildingName");
+                    b.Property<string>("BuildingName")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
-                    b.ToTable("Building");
+                    b.ToTable("Buildings");
                 });
 
             modelBuilder.Entity("PeoplePro.Models.Department", b =>
@@ -42,19 +44,43 @@ namespace PeoplePro.Migrations.Department
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<decimal>("Budget");
-
                     b.Property<int>("BuildingId");
 
                     b.Property<DateTime>("DateFounded");
 
-                    b.Property<string>("DepartmentName");
+                    b.Property<string>("DepartmentName")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
                     b.HasIndex("BuildingId");
 
-                    b.ToTable("Department");
+                    b.ToTable("Departments");
+                });
+
+            modelBuilder.Entity("PeoplePro.Models.Employee", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("BirthDate");
+
+                    b.Property<int>("DepartmentID");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired();
+
+                    b.Property<string>("LastName")
+                        .IsRequired();
+
+                    b.Property<DateTime>("StartDate");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DepartmentID");
+
+                    b.ToTable("Employees");
                 });
 
             modelBuilder.Entity("PeoplePro.Models.Department", b =>
@@ -62,6 +88,14 @@ namespace PeoplePro.Migrations.Department
                     b.HasOne("PeoplePro.Models.Building", "Building")
                         .WithMany()
                         .HasForeignKey("BuildingId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("PeoplePro.Models.Employee", b =>
+                {
+                    b.HasOne("PeoplePro.Models.Department", "Department")
+                        .WithMany()
+                        .HasForeignKey("DepartmentID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

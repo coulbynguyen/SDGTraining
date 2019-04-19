@@ -5,15 +5,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using PeoplePro.Infrastructure;
 using PeoplePro.Models;
 
 namespace PeoplePro.Controllers
 {
     public class BuildingsController : Controller
     {
-        private readonly BuildingContext _context;
+        private readonly PeopleProContext _context;
 
-        public BuildingsController(BuildingContext context)
+        public BuildingsController(PeopleProContext context)
         {
             _context = context;
         }
@@ -21,12 +22,12 @@ namespace PeoplePro.Controllers
         // GET: Buildings
         public async Task<IActionResult> Index(string searchString)
         {
-            var buildings = from b in _context.Building select b;
+            var buildings = from b in _context.Buildings select b;
             if (!String.IsNullOrEmpty(searchString))
             {
-                buildings = buildings.Where(s => s.BuildingName.Contains(searchString)); 
+                buildings = buildings.Where(s => s.BuildingName.Contains(searchString));
             }
-            //return View(await _context.Building.ToListAsync());
+            //return View(await _context.Buildings.ToListAsync());
             return View(await buildings.ToListAsync());
         }
 
@@ -38,7 +39,7 @@ namespace PeoplePro.Controllers
                 return NotFound();
             }
 
-            var building = await _context.Building
+            var building = await _context.Buildings
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (building == null)
             {
@@ -78,7 +79,7 @@ namespace PeoplePro.Controllers
                 return NotFound();
             }
 
-            var building = await _context.Building.FindAsync(id);
+            var building = await _context.Buildings.FindAsync(id);
             if (building == null)
             {
                 return NotFound();
@@ -129,7 +130,7 @@ namespace PeoplePro.Controllers
                 return NotFound();
             }
 
-            var building = await _context.Building
+            var building = await _context.Buildings
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (building == null)
             {
@@ -144,15 +145,15 @@ namespace PeoplePro.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var building = await _context.Building.FindAsync(id);
-            _context.Building.Remove(building);
+            var building = await _context.Buildings.FindAsync(id);
+            _context.Buildings.Remove(building);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool BuildingExists(int id)
         {
-            return _context.Building.Any(e => e.Id == id);
+            return _context.Buildings.Any(e => e.Id == id);
         }
     }
 }

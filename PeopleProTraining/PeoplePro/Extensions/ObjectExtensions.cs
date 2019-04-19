@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PeoplePro.Dal.Extensions
+namespace PeoplePro.Extensions
 {
     public static class ObjectExtensions
     {

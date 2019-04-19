@@ -9,6 +9,7 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
+
 <form asp-controller="Employees" asp-action="Index" method="get">
     <p>
         Search First Name: <input type="text" name="firstNameSearchString"><br /><br />
@@ -16,14 +17,15 @@
         <input type="submit" value="Filter" />
     </p>
 </form>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.FName)
+                @Html.DisplayNameFor(model => model.FirstName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LName)
+                @Html.DisplayNameFor(model => model.LastName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.BirthDate)
@@ -41,10 +43,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.FName)
+                @Html.DisplayFor(modelItem => item.FirstName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LName)
+                @Html.DisplayFor(modelItem => item.LastName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.BirthDate)

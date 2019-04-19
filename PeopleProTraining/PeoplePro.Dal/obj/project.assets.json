@@ -2,18 +2,6 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v2.1": {
-      "AjaxControlToolkit/18.1.1": {
-        "type": "package",
-        "compile": {
-          "lib/net40/AjaxControlToolkit.dll": {}
-        },
-        "runtime": {
-          "lib/net40/AjaxControlToolkit.dll": {}
-        }
-      },
-      "jQuery/3.3.1": {
-        "type": "package"
-      },
       "Microsoft.CSharp/4.5.0": {
         "type": "package",
         "compile": {
@@ -951,40 +939,6 @@
     }
   },
   "libraries": {
-    "AjaxControlToolkit/18.1.1": {
-      "sha512": "34Qqi6u1w0QHX+Po8cBC5wqX9sVa7fGvLozDKAZBjbyakDnPs00/IN5thQAPTk4OepUmnO0zaajHrEtUNGt4xA==",
-      "type": "package",
-      "path": "ajaxcontroltoolkit/18.1.1",
-      "files": [
-        ".signature.p7s",
-        "Content/Web.config.transform",
-        "ajaxcontroltoolkit.18.1.1.nupkg.sha512",
-        "ajaxcontroltoolkit.nuspec",
-        "lib/net40/AjaxControlToolkit.dll",
-        "readme.txt"
-      ]
-    },
-    "jQuery/3.3.1": {
-      "sha512": "Emsts1D6E2AgHVBm4cTD2dxoRyWVG+3zK1x8mYbf+k6aAArPTXHR2Ip++o1utlNbmYIzaPFnhGw3YDexp8PjlQ==",
-      "type": "package",
-      "path": "jquery/3.3.1",
-      "files": [
-        ".signature.p7s",
-        "Content/Scripts/jquery-3.3.1-vsdoc.js",
-        "Content/Scripts/jquery-3.3.1.js",
-        "Content/Scripts/jquery-3.3.1.min.js",
-        "Content/Scripts/jquery-3.3.1.min.map",
-        "Content/Scripts/jquery-3.3.1.slim.js",
-        "Content/Scripts/jquery-3.3.1.slim.min.js",
-        "Content/Scripts/jquery-3.3.1.slim.min.map",
-        "Tools/common.ps1",
-        "Tools/install.ps1",
-        "Tools/jquery-3.3.1.intellisense.js",
-        "Tools/uninstall.ps1",
-        "jquery.3.3.1.nupkg.sha512",
-        "jquery.nuspec"
-      ]
-    },
     "Microsoft.CSharp/4.5.0": {
       "sha512": "yWWeTbGCzBOlRPWDCIxiTZW1ecZiMbao0ZT97KKEWdBhrLvUqU8RdzkhzuCRQzvoxzxlR7vytO43OOgFdkxv6g==",
       "type": "package",
@@ -3437,11 +3391,9 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.1": [
-      "AjaxControlToolkit >= 18.1.1",
       "Microsoft.EntityFrameworkCore.Design >= 2.1.4",
       "Microsoft.EntityFrameworkCore.Sqlite >= 2.1.4",
-      "Microsoft.NETCore.App >= 2.1.0",
-      "jQuery >= 3.3.1"
+      "Microsoft.NETCore.App >= 2.1.0"
     ]
   },
   "packageFolders": {
@@ -3485,10 +3437,6 @@
     "frameworks": {
       "netcoreapp2.1": {
         "dependencies": {
-          "AjaxControlToolkit": {
-            "target": "Package",
-            "version": "[18.1.1, )"
-          },
           "Microsoft.EntityFrameworkCore.Design": {
             "target": "Package",
             "version": "[2.1.4, )"
@@ -3502,10 +3450,6 @@
             "target": "Package",
             "version": "[2.1.0, )",
             "autoReferenced": true
-          },
-          "jQuery": {
-            "target": "Package",
-            "version": "[3.3.1, )"
           }
         },
         "imports": [
@@ -3515,17 +3459,5 @@
         "warn": true
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'AjaxControlToolkit 18.1.1' was restored using '.NETFramework,Version=v4.6.1' instead of the project target framework '.NETCoreApp,Version=v2.1'. This package may not be fully compatible with your project.",
-      "libraryId": "AjaxControlToolkit",
-      "targetGraphs": [
-        ".NETCoreApp,Version=v2.1"
-      ]
-    }
-  ]
+  }
 }

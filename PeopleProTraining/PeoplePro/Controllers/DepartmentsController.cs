@@ -5,15 +5,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using PeoplePro.Infrastructure;
 using PeoplePro.Models;
 
 namespace PeoplePro.Controllers
 {
     public class DepartmentsController : Controller
     {
-        private readonly DepartmentContext _context;
+        private readonly PeopleProContext _context;
 
-        public DepartmentsController(DepartmentContext context)
+        public DepartmentsController(PeopleProContext context)
         {
             _context = context;
         }
@@ -21,14 +22,14 @@ namespace PeoplePro.Controllers
         // GET: Departments
         public async Task<IActionResult> Index(string searchString)
         {
-            var departmentContext = _context.Department.Include(d => d.Building);
-            var departments = from d in _context.Department.Include(b =>b.Building) select d;
+            var peopleProContext = _context.Departments.Include(d => d.Building);
+            var departments = from d in _context.Departments.Include(b => b.Building) select d;
             if (!String.IsNullOrEmpty(searchString))
             {
                 departments = departments.Where(s => s.DepartmentName.Contains(searchString));
             }
-
-            //return View(await departmentContext.ToListAsync());
+            
+            //return View(await peopleProContext.ToListAsync());
             return View(await departments.ToListAsync());
         }
 
@@ -40,7 +41,7 @@ namespace PeoplePro.Controllers
                 return NotFound();
             }
 
-            var department = await _context.Department
+            var department = await _context.Departments
                 .Include(d => d.Building)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (department == null)
@@ -54,7 +55,7 @@ namespace PeoplePro.Controllers
         // GET: Departments/Create
         public IActionResult Create()
         {
-            ViewData["BuildingId"] = new SelectList(_context.Set<Building>(), "Id", "Id");
+            ViewData["BuildingId"] = new SelectList(_context.Buildings, "Id", "BuildingAbrev");
             return View();
         }
 
@@ -63,7 +64,7 @@ namespace PeoplePro.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,DepartmentName,DateFounded,Budget,BuildingId")] Department department)
+        public async Task<IActionResult> Create([Bind("Id,DepartmentName,DateFounded,BuildingId")] Department department)
         {
             if (ModelState.IsValid)
             {
@@ -71,7 +72,7 @@ namespace PeoplePro.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BuildingId"] = new SelectList(_context.Set<Building>(), "Id", "Id", department.BuildingId);
+            ViewData["BuildingId"] = new SelectList(_context.Buildings, "Id", "BuildingAbrev", department.BuildingId);
             return View(department);
         }
 
@@ -83,12 +84,12 @@ namespace PeoplePro.Controllers
                 return NotFound();
             }
 
-            var department = await _context.Department.FindAsync(id);
+            var department = await _context.Departments.FindAsync(id);
             if (department == null)
             {
                 return NotFound();
             }
-            ViewData["BuildingId"] = new SelectList(_context.Set<Building>(), "Id", "Id", department.BuildingId);
+            ViewData["BuildingId"] = new SelectList(_context.Buildings, "Id", "BuildingAbrev", department.BuildingId);
             return View(department);
         }
 
@@ -97,7 +98,7 @@ namespace PeoplePro.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,DepartmentName,DateFounded,Budget,BuildingId")] Department department)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,DepartmentName,DateFounded,BuildingId")] Department department)
         {
             if (id != department.Id)
             {
@@ -124,7 +125,7 @@ namespace PeoplePro.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BuildingId"] = new SelectList(_context.Set<Building>(), "Id", "Id", department.BuildingId);
+            ViewData["BuildingId"] = new SelectList(_context.Buildings, "Id", "BuildingAbrev", department.BuildingId);
             return View(department);
         }
 
@@ -136,7 +137,7 @@ namespace PeoplePro.Controllers
                 return NotFound();
             }
 
-            var department = await _context.Department
+            var department = await _context.Departments
                 .Include(d => d.Building)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (department == null)
@@ -152,15 +153,15 @@ namespace PeoplePro.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var department = await _context.Department.FindAsync(id);
-            _context.Department.Remove(department);
+            var department = await _context.Departments.FindAsync(id);
+            _context.Departments.Remove(department);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool DepartmentExists(int id)
         {
-            return _context.Department.Any(e => e.Id == id);
+            return _context.Departments.Any(e => e.Id == id);
         }
     }
 }

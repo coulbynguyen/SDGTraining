@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using PeoplePro.Dal.Extensions;
-using PeoplePro.Dal.Interfaces;
-using PeoplePro.Dal.Models;
+using PeoplePro.Extensions;
+using PeoplePro.Interfaces;
+using PeoplePro.Models;
 
-namespace PeoplePro.Dal.Infrastructure
+namespace PeoplePro.Infrastructure
 {
     public sealed class PeopleProRepo : IPeopleProRepo
     {
@@ -116,7 +116,7 @@ namespace PeoplePro.Dal.Infrastructure
             }
         }
 
-        IQueryable<PeoplePro.Dal.Models.Employee> IPeopleProRepo.GetEmployees()
+        IQueryable<PeoplePro.Models.Employee> IPeopleProRepo.GetEmployees()
         {
             throw new NotImplementedException();
         }
